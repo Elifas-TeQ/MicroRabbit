@@ -101,6 +101,7 @@ public sealed class RabbitMqBus : IEventBus
         }
         catch (Exception ex)
         {
+            Console.WriteLine($"Error processing event '{eventName}': {ex.Message}");
         }
     }
 
@@ -119,7 +120,6 @@ public sealed class RabbitMqBus : IEventBus
                 var @event = System.Text.Json.JsonSerializer.Deserialize(message, eventType);
                 var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
                 await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
-
             }
         }
     }
