@@ -7,9 +7,9 @@ public interface IEventBus
 {
     Task SendCommand<T>(T command) where T : Command;
 
-    void PublishEvent<T>(T @event) where T : Event;
+    Task PublishAsync<T>(T @event) where T : Event;
 
-    void Subscribe<T, TH>()
+    Task SubscribeAsync<T, TH>()
         where T : Event
         where TH : IEventHandler<T>;
 }
