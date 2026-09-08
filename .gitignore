@@ -1,0 +1,15 @@
+## .NET build output
+bin/
+obj/
+
+## User-specific files
+*.user
+*.suo
+
+## IDE files
+.vs/
+.vscode/
+
+## NuGet and local tooling
+*.nupkg
+packages/
