@@ -22,4 +22,11 @@ public class BankingController : ControllerBase
         var accounts = _accountService.GetAccounts();
         return Ok(accounts);
     }
+
+    [HttpPost]
+    public ActionResult Post([FromBody] AccountTransfer accountTransfer)
+    {
+        _accountService.Transfer(accountTransfer);
+        return Ok();
+    }
 }

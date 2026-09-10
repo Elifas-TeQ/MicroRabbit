@@ -82,7 +82,7 @@ public sealed class RabbitMqBus : IEventBus
 
         var eventName = typeof(T).Name;
 
-        await channel.QueueDeclareAsync(eventName, durable: false, exclusive: false, autoDelete: false);
+        await channel.QueueDeclareAsync(eventName, durable: true, exclusive: false, autoDelete: false);
 
         var consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += Consumer_Received;
