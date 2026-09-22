@@ -13,3 +13,6 @@ obj/
 ## NuGet and local tooling
 *.nupkg
 packages/
+
+## EF Core migrations
+**/Migrations/
