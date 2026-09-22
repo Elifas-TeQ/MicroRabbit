@@ -2,6 +2,9 @@ using MicroRabbit.Transfer.Data.Context;
 using MicroRabbit.Infra.IoC;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
+using MicroRabbit.Domain.Core.Bus;
+using MicroRabbit.Transfer.Domain.EventHandlers;
+using MicroRabbit.Transfer.Domain.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,5 +53,8 @@ app.UseSwaggerUI((options) =>
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+var eventBus = app.Services.GetRequiredService<IEventBus>();
+await eventBus.SubscribeAsync<TransferCreatedEvent, TransferEventHandler>();
 
 app.Run();

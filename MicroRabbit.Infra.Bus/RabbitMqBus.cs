@@ -35,7 +35,7 @@ public sealed class RabbitMqBus : IEventBus
 
         var eventName = @event.GetType().Name;
 
-        await channel.QueueDeclareAsync(eventName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+        await channel.QueueDeclareAsync(eventName, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
         var message = System.Text.Json.JsonSerializer.Serialize(@event);
         var body = Encoding.UTF8.GetBytes(message);
