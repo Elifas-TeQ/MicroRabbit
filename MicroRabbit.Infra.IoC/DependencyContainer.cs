@@ -23,7 +23,12 @@ public class DependencyContainer
     public static void RegisterServices(IServiceCollection services)
     {
         // Shared cross-service registration
-        services.AddSingleton<IEventBus, RabbitMqBus>();
+        services.AddSingleton<IEventBus, RabbitMqBus>(/*(sp) =>
+        {
+            var mediator = sp.GetRequiredService<IMediator>();
+            var serviceScopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+            return new RabbitMqBus(mediator, serviceScopeFactory);
+        }*/);
     }
 
     /// Banking-specific registrations
