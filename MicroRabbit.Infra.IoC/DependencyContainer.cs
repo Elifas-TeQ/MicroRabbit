@@ -48,6 +48,9 @@ public class DependencyContainer
     /// Transfer-specific registrations
     public static void RegisterTransferServices(IServiceCollection services)
     {
+        // Subscriptions
+        services.AddTransient<TransferEventHandler>();
+
         // Domain Events
         services.AddTransient<IEventHandler<TransferCreatedEvent>,  TransferEventHandler>();
 

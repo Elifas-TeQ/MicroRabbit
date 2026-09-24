@@ -17,4 +17,10 @@ public class TransferRepository : ITransferRepository
     {
         return _context.TransferLogs;
     }
+
+    public async Task AddAsync(TransferLog transferLog)
+    {
+        _context.TransferLogs.Add(transferLog);
+        await _context.SaveChangesAsync();
+    }
 }

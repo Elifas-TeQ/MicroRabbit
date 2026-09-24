@@ -125,7 +125,7 @@ public sealed class RabbitMqBus : IEventBus
                 var eventType = _eventTypes.SingleOrDefault((x) => x.Name == eventName);
                 var @event = System.Text.Json.JsonSerializer.Deserialize(message, eventType);
                 var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                await (Task)concreteType.GetMethod(nameof(IEventHandler<>.HandleAsync)).Invoke(handler, new object[] { @event });
             }
         }
     }
